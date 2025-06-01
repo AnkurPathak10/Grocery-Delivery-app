@@ -10,16 +10,19 @@ const Navbar = () => {
 
     const logout = async ()=>{
       try {
-        const { data } = await axios.get('/api/user/logout')
+        const { data } = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/user/logout`,
+        { withCredentials: true }
+        );
         if(data.success){
           toast.success(data.message)
           setUser(null);
-          navigate('/')
+          navigate('/');
         }else{
           toast.error(data.message)
         }
       } catch (error) {
-        toast.error(error.message)
+        toast.error(error.response?.data?.message || error.message);
       }
         
     }

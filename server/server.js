@@ -22,11 +22,13 @@ await connectCloudinary()
 const allowedOrigins = ['http://localhost:5173', 'https://greencart-frontend-eight.vercel.app']
 app.use(cors({origin: allowedOrigins, credentials: true}));
 
-app.post('/stripe', express.raw({type: 'application/json'}), stripeWebhooks)
-
 // Middleware configuration
 app.use(express.json());
 app.use(cookieParser());
+
+app.post('/stripe', express.raw({type: 'application/json'}), stripeWebhooks)
+
+
 
 
 app.get('/', (req, res) => res.send("API is Working"));
