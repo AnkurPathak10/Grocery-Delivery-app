@@ -18,6 +18,9 @@ const port = process.env.PORT || 4000;
 await connectDB()
 await connectCloudinary()
 
+app.post('/stripe', express.raw({type: 'application/json'}), stripeWebhooks)
+
+
 // Allow multiple origins
 const allowedOrigins = ['http://localhost:5173', 'https://greencart-frontend-eight.vercel.app']
 app.use(cors({origin: allowedOrigins, credentials: true}));
@@ -26,7 +29,6 @@ app.use(cors({origin: allowedOrigins, credentials: true}));
 app.use(express.json());
 app.use(cookieParser());
 
-app.post('/stripe', express.raw({type: 'application/json'}), stripeWebhooks)
 
 
 
